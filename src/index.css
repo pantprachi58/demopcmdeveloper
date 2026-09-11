@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #F4F1EA;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #A88A5A;
+  color: #F4F1EA;
+}
+
+/* Thin scrollbar, premium feel */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #F4F1EA; }
+::-webkit-scrollbar-thumb { background: #1B1B1B; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fade-up reveal utility */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-outline {
+  -webkit-text-stroke: 1px #111111;
+  color: transparent;
+}
+
+.hairline {
+  border-color: rgba(17,17,17,0.12);
+}
