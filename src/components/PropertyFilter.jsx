@@ -1,4 +1,10 @@
 import { LayoutGrid, List, ChevronDown } from "lucide-react";
+import {
+  LOCATION_OPTIONS,
+  TYPE_OPTIONS,
+  BUDGET_OPTIONS,
+  STATUS_OPTIONS,
+} from "../utils/filters";
 
 function Select({ label, value, onChange, options }) {
   return (
@@ -37,25 +43,25 @@ export default function PropertyFilter({ filters, setFilters, view, setView, res
             label="Location"
             value={filters.city}
             onChange={update("city")}
-            options={["All Locations", "Dehradun", "Nainital", "Bangalore"]}
+            options={LOCATION_OPTIONS}
           />
           <Select
             label="Property Type"
             value={filters.type}
             onChange={update("type")}
-            options={["All Types", "Residential", "Commercial", "Apartments", "Industrial", "Luxury Homes"]}
+            options={TYPE_OPTIONS}
           />
           <Select
             label="Budget"
             value={filters.budget}
             onChange={update("budget")}
-            options={["Any Budget", "Under ₹3 Cr", "₹3 Cr – ₹5 Cr", "Above ₹5 Cr"]}
+            options={BUDGET_OPTIONS}
           />
           <Select
             label="Status"
             value={filters.status}
             onChange={update("status")}
-            options={["All Status", "AVAILABLE", "NEW LAUNCH", "SOLD OUT"]}
+            options={STATUS_OPTIONS}
           />
         </div>
 

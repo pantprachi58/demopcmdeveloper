@@ -298,6 +298,21 @@ export const properties = [
   },
 ];
 
+// Icon tiles shown directly under the hero search console. Each tile is a
+// property type from the listing filter, so selecting one opens /properties
+// filtered to that type. `icon` maps to a lucide-react icon in the Home page,
+// and counts are derived so a tile never promises more than the filter returns.
+export const searchCategories = [
+  { type: "Residential", icon: "home" },
+  { type: "Commercial", icon: "building2" },
+  { type: "Apartments", icon: "building" },
+  { type: "Industrial", icon: "factory" },
+  { type: "Luxury Homes", icon: "gem" },
+].map((category) => ({
+  ...category,
+  count: properties.filter((p) => p.type === category.type).length,
+}));
+
 export const propertyCategories = [
   {
     name: "Residential",
@@ -321,7 +336,7 @@ export const propertyCategories = [
     name: "Industrial",
     count: "15 Properties",
     image:
-      "https://images.unsplash.com/photo-1581093458791-9d42e3f10a71?q=80&w=1200&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
   },
   {
     name: "Luxury Homes",

@@ -1,37 +1,31 @@
 import { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
 import PageHero from "../components/PageHero";
 import PropertyFilter from "../components/PropertyFilter";
 import PropertyGrid from "../components/PropertyGrid";
 import CTASection from "../components/CTASection";
 import { properties } from "../data/properties";
-
-function matchesBudget(priceValue, budget) {
-  if (budget === "Under ₹3 Cr") return priceValue < 30000000;
-  if (budget === "₹3 Cr – ₹5 Cr") return priceValue >= 30000000 && priceValue <= 50000000;
-  if (budget === "Above ₹5 Cr") return priceValue > 50000000;
-  return true;
-}
+import {
+  filterProperties,
+  filtersFromSearchParams,
+  filtersToSearchParams,
+} from "../utils/filters";
 
 export default function Properties() {
-  const [filters, setFilters] = useState({
-    city: "All Locations",
-    type: "All Types",
-    budget: "Any Budget",
-    status: "All Status",
-  });
+  // Filters live in the URL so the home page search console can link straight
+  // into a pre-filtered listing (and the result stays shareable/bookmarkable).
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filters = useMemo(() => filtersFromSearchParams(searchParams), [searchParams]);
+
+  const setFilters = (update) => {
+    const next = typeof update === "function" ? update(filters) : update;
+    setSearchParams(filtersToSearchParams(next), { replace: true });
+  };
+
   const [view, setView] = useState("grid");
 
-  const filtered = useMemo(() => {
-    return properties.filter((p) => {
-      if (filters.city !== "All Locations" && p.city !== filters.city) return false;
-      if (filters.type !== "All Types" && p.type !== filters.type) return false;
-      if (filters.status !== "All Status" && p.status !== filters.status) return false;
-      if (!matchesBudget(p.priceValue, filters.budget)) return false;
-      return true;
-    });
-  }, [filters]);
+  const filtered = useMemo(() => filterProperties(properties, filters), [filters]);
 
   return (
     <>

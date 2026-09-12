@@ -1,5 +1,15 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight, Wind, ShieldCheck, Waves } from "lucide-react";
+import {
+  ArrowUpRight,
+  Wind,
+  ShieldCheck,
+  Waves,
+  Home as HomeIcon,
+  Building,
+  Building2,
+  Factory,
+  Gem,
+} from "lucide-react";
 import Hero from "../components/Hero";
 import SectionHeading from "../components/SectionHeading";
 import Stats from "../components/Stats";
@@ -10,7 +20,22 @@ import CTASection from "../components/CTASection";
 import ImageReveal from "../components/ImageReveal";
 import Button from "../components/Button";
 import useReveal from "../hooks/useReveal";
-import { properties, propertyCategories, testimonials, faqs } from "../data/properties";
+import {
+  properties,
+  propertyCategories,
+  searchCategories,
+  testimonials,
+  faqs,
+} from "../data/properties";
+import { DEFAULT_FILTERS, filtersToSearchParams } from "../utils/filters";
+
+const categoryIcons = {
+  home: HomeIcon,
+  building: Building,
+  building2: Building2,
+  factory: Factory,
+  gem: Gem,
+};
 
 export default function Home() {
   const featured = properties.slice(0, 3);
@@ -23,8 +48,41 @@ export default function Home() {
       {/* Spacer for the overlapping search console */}
       <div className="h-24 md:h-20" />
 
+      {/* Quick category tiles */}
+      <section className="max-w-6xl mx-auto px-6 md:px-10 pt-10 pb-20 md:pt-16 md:pb-24">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+          {searchCategories.map((cat) => {
+            const Icon = categoryIcons[cat.icon];
+            const href = `/properties?${filtersToSearchParams({
+              ...DEFAULT_FILTERS,
+              type: cat.type,
+            })}`;
+            return (
+              <Link
+                key={cat.type}
+                to={href}
+                className="rounded-[8px] group border border-ink/10 bg-ivory px-6 py-8 flex flex-col items-center justify-center text-center transition-all duration-300 ease-premium hover:border-gold hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
+              >
+                <Icon
+                  size={30}
+                  strokeWidth={1.5}
+                  className="text-ink transition-colors duration-300 group-hover:text-gold"
+                />
+                <p className="mt-5 text-[15px] font-medium text-ink">{cat.type}</p>
+                <p className="mt-1 text-[14px] text-muted font-light">{cat.count}</p>
+              </Link>
+            );
+          })}
+        </div>
+        <div className="mt-10 md:mt-12 flex justify-center">
+          <Button as={Link} to="/properties" arrow={false}>
+            All Categories
+          </Button>
+        </div>
+      </section>
+
       {/* Brand story */}
-      <section className="max-w-8xl mx-auto px-6 md:px-10 py-24 md:py-32">
+      <section className="max-w-8xl mx-auto px-6 md:px-10 pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-24 items-center">
           <SectionHeading
             eyebrow="01 — Our Philosophy"
