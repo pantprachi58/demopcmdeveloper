@@ -45,11 +45,11 @@ export default function Home() {
     <>
       <Hero />
 
-      {/* Spacer for the overlapping search console */}
-      <div className="h-24 md:h-20" />
+      {/* Spacer for the overlapping desktop search console */}
+      <div className="hidden md:block md:h-20" />
 
       {/* Quick category tiles */}
-      <section className="max-w-6xl mx-auto px-6 md:px-10 pt-10 pb-20 md:pt-16 md:pb-24">
+      <section className="max-w-6xl mx-auto px-6 md:px-10 pt-8 pb-20 md:pt-16 md:pb-24">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {searchCategories.map((cat) => {
             const Icon = categoryIcons[cat.icon];
@@ -61,7 +61,7 @@ export default function Home() {
               <Link
                 key={cat.type}
                 to={href}
-                className="rounded-[8px] group border border-ink/10 bg-ivory px-6 py-8 flex flex-col items-center justify-center text-center transition-all duration-300 ease-premium hover:border-gold hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
+                className="rounded-[8px] group border border-ink/10 bg-ivory px-4 py-7 sm:px-6 sm:py-8 flex min-h-[158px] flex-col items-center justify-center text-center transition-all duration-300 ease-premium hover:border-gold hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)]"
               >
                 <Icon
                   size={30}

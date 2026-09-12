@@ -42,7 +42,7 @@ export default function SearchSelect({ label, value, onChange, options, border }
         onClick={() => setOpen((o) => !o)}
         aria-haspopup="listbox"
         aria-expanded={open}
-        className={`w-full text-left px-8 py-6 transition-colors duration-200 ${
+        className={`w-full text-left px-6 py-5 md:px-8 md:py-6 transition-colors duration-200 ${
           open ? "bg-beige/40" : "hover:bg-beige/20"
         }`}
       >
@@ -77,7 +77,7 @@ export default function SearchSelect({ label, value, onChange, options, border }
                   onChange(option);
                   setOpen(false);
                 }}
-                className={`w-full text-left px-8 py-3 text-[15px] transition-colors duration-200 hover:bg-beige/50 ${
+                className={`w-full text-left px-6 py-3 md:px-8 text-[15px] transition-colors duration-200 hover:bg-beige/50 ${
                   option === value ? "text-gold" : "text-ink"
                 }`}
               >

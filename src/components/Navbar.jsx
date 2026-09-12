@@ -36,15 +36,15 @@ export default function Navbar() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-premium ${
         transparent
-          ? "bg-transparent py-7"
+          ? "bg-ivory/95 backdrop-blur border-b border-ink/10 py-4 shadow-[0_1px_0_rgba(17,17,17,0.04)] lg:bg-transparent lg:backdrop-blur-0 lg:border-transparent lg:py-7 lg:shadow-none"
           : "bg-ivory/95 backdrop-blur border-b border-ink/10 py-4 shadow-[0_1px_0_rgba(17,17,17,0.04)]"
       }`}
     >
-      <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between">
+      <div className="relative z-50 max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between">
         <Link
           to="/"
           className={`text-[15px] tracking-[0.22em] font-medium ${
-            transparent ? "text-ivory" : "text-ink"
+            transparent ? "text-ink lg:text-ivory" : "text-ink"
           }`}
         >
           PCM DEVELOPERS
@@ -82,7 +82,7 @@ export default function Navbar() {
         </Link>
 
         <button
-          className={`lg:hidden ${transparent ? "text-ivory" : "text-ink"}`}
+          className="lg:hidden text-ink"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -92,11 +92,11 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className={`lg:hidden fixed inset-0 top-0 bg-ivory transition-transform duration-500 ease-premium z-40 ${
+        className={`absolute inset-x-0 top-full z-40 h-[calc(100svh-59px)] bg-ivory transition-transform duration-500 ease-premium lg:hidden ${
           open ? "translate-x-0" : "translate-x-full pointer-events-none"
         }`}
       >
-        <div className="flex flex-col h-full justify-center px-10 gap-7">
+        <div className="flex flex-col h-full justify-center px-8 sm:px-10 gap-6 border-t border-ink/10">
           {LINKS.map((link, i) => (
             <Link
               key={link.to}
